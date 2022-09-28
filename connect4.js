@@ -90,7 +90,11 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  // make a div and insert into correct table cell
+  let coordinate = document.getElementById(`${y}-${x}`);
+  let piece = document.createElement("div");
+  piece.className = `piece p${currPlayer}`;
+  coordinate.appendChild(piece);
 }
 
 /** endGame: announce game end */
