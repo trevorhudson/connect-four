@@ -22,15 +22,13 @@ function makeBoard() {
 
   // use a loop to generate the rows and cells
   // let row = Array.from({length: WIDTH});
-  let board = [];
-  for (let y=0; y< HEIGHT; y++){
+  for (let y = 0; y < HEIGHT; y++) {
     let row = [];
-    for (let x=0; x< WIDTH; x++){
+    for (let x = 0; x < WIDTH; x++) {
       row.push(null);
     }
     board.push(row);
   }
-  return board;
 }
 
 
@@ -43,18 +41,18 @@ function makeHtmlBoard() {
   const htmlBoard = document.querySelector('#board');
 
   // creates an element row with an event listener handleClick();
-  let top = document.createElement("tr");
+  const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
   // creates a cell element that is appended to the head row.
 
-    for (let x = 0; x < WIDTH; x++) {
-      let headCell = document.createElement("td");
-      headCell.setAttribute("id", x);
-      top.append(headCell);
-    }
-    htmlBoard.append(top);
+  for (let x = 0; x < WIDTH; x++) {
+    const headCell = document.createElement("td");
+    headCell.setAttribute("id", x);
+    top.append(headCell);
+  }
+  htmlBoard.append(top);
 
 
   // dynamically creates the main part of html board
@@ -62,11 +60,11 @@ function makeHtmlBoard() {
   // uses WIDTH to create table cells for each row
   for (let y = 0; y < HEIGHT; y++) {
     // TODO: Create a table row element and assign to a "row" variable
-    let row = document.createElement("tr");
+    const row = document.createElement("tr");
 
     for (let x = 0; x < WIDTH; x++) {
       // Create a table cell element and assign to a "cell" variable
-      let cell = document.createElement("td");
+      const cell = document.createElement("td");
 
       // add an id, y-x, to the above table cell element
       cell.setAttribute("id", `${y}-${x}`);
@@ -78,7 +76,7 @@ function makeHtmlBoard() {
     }
     // TODO: append the row to the html board
 
-  htmlBoard.append(row);
+    htmlBoard.append(row);
   }
 }
 
