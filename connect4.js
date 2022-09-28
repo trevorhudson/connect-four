@@ -17,18 +17,18 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  // set "board" to empty HEIGHT x WIDTH matrix array
 
   // use a loop to generate the rows and cells
   // let row = Array.from({length: WIDTH});
   let board = [];
-  for (let i=0; i< HEIGHT; i++){
+  for (let y=0; y< HEIGHT; y++){
     let row = [];
-    for (let j=0; j< WIDTH; j++){
+    for (let x=0; x< WIDTH; x++){
       row.push(null);
-    } board.push(row);
+    }
+    board.push(row);
   }
   return board;
 }
@@ -36,21 +36,23 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  // get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector('#board');
 
-  // TODO: add comment for this code
+  // creates an element row with an event listener handleClick();
   let top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  // TODO: add comment for this code
-  for (let x = 0; x < WIDTH; x++) {
-    let headCell = document.createElement("td");
-    headCell.setAttribute("id", x);
-    top.append(headCell);
+  // creates a cell element that is appended to the head row.
+  function createCell() {
+    for (let x = 0; x < WIDTH; x++) {
+      let headCell = document.createElement("td");
+      headCell.setAttribute("id", `${y}-${x}`);
+      top.append(headCell);
+    }
+    htmlBoard.append(top);
   }
-  htmlBoard.append(top);
 
   // dynamically creates the main part of html board
   // uses HEIGHT to create table rows
@@ -61,9 +63,10 @@ function makeHtmlBoard() {
     for (let x = 0; x < WIDTH; x++) {
       // TODO: Create a table cell element and assign to a "cell" variable
 
+
       // TODO: add an id, y-x, to the above table cell element
       // you'll use this later, so make sure you use y-x
-
+      createCell();
       // TODO: append the table cell to the table row
 
     }
