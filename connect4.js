@@ -18,19 +18,15 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-  // set "board" to empty HEIGHT x WIDTH matrix array
-
-  // use a loop to generate the rows and cells
-  // let row = Array.from({length: WIDTH});
   for (let y = 0; y < HEIGHT; y++) {
     let row = [];
+
     for (let x = 0; x < WIDTH; x++) {
       row.push(null);
     }
     board.push(row);
   }
 }
-
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
@@ -52,27 +48,16 @@ function makeHtmlBoard() {
   }
   htmlBoard.append(top);
 
+  // creates a cell element that is appended to the y-x grid
 
-  // dynamically creates the main part of html board
-  // uses HEIGHT to create table rows
-  // uses WIDTH to create table cells for each row
   for (let y = 0; y < HEIGHT; y++) {
-    // TODO: Create a table row element and assign to a "row" variable
     const row = document.createElement("tr");
 
     for (let x = 0; x < WIDTH; x++) {
-      // Create a table cell element and assign to a "cell" variable
       const cell = document.createElement("td");
-
-      // add an id, y-x, to the above table cell element
       cell.setAttribute("id", `${y}-${x}`);
-
-      // you'll use this later, so make sure you use y-x
-
-      // TODO: append the table cell to the table row
       row.append(cell);
     }
-    // TODO: append the row to the html board
 
     htmlBoard.append(row);
   }
@@ -81,14 +66,11 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return bottom empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 5
 
   for (let y = HEIGHT - 1; y >= 0; y--) {
-    let targetCell = document.getElementById(`${y}-${x}`);
+    let targetCell = board[y][x];
 
-    // if target cell includes a div, continue loop; if empty, return y;
-    let piece = document.getElement;
-    if (targetCell.childElementCount === 0) return y;
+    if (targetCell === null) return y;
   }
   return null;
 }
@@ -103,13 +85,11 @@ function placeInTable(y, x) {
   piece.className = `piece p${currPlayer}`;
   coordinate.appendChild(piece);
 
-
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
   alert(msg);
 }
 
@@ -126,7 +106,6 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   placeInTable(y, x);
   board[y][x] = currPlayer;
 
@@ -136,16 +115,12 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
-
-  //
-
   let filled = document.querySelectorAll('.piece').length;
   const BOARD_SIZE = (HEIGHT * WIDTH);
 
-
   if (filled === BOARD_SIZE) endGame('game over');
 
+  // switch the current player
   currPlayer = (currPlayer === 1) ? 2 : 1;
 
 }
@@ -160,31 +135,17 @@ function checkForWin() {
    * currPlayer
    */
 
-   function _win(cells) {
-    // check that array sizes are still correct;
+  function _win(cells) {
+
+    // check that each cell is within bounds and matches current Player
 
     return cells.every(([y, x]) => (y >= 0) && (y < HEIGHT) && (x >= 0) &&
-    (x < WIDTH) && (board[y][x] === currPlayer));
-
-    // takes in coords of cells
-    // gets element at coord from DOM
-    // checks if elements are all same color !! and not empty
-    // TODO: Check four cells to see if they're all legal & all color of current
-    // player
+      (x < WIDTH) && (board[y][x] === currPlayer));
 
   }
 
-
-  // using HEIGHT and WIDTH, generate "check list" of coordinates
-  // for 4 cells (starting here) for each of the different
-  // ways to win: horizontal, vertical, diagonalDR, diagonalDL
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
-      // TODO: assign values to the below variables for each of the ways to win
-      // horizontal has been assigned for you
-      // each should be an array of 4 cell coordinates:
-      // [ [y, x], [y, x], [y, x], [y, x] ]
-
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
       let diagDL = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
